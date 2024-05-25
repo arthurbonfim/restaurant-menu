@@ -1,95 +1,78 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import Head from "next/head";
+import styles from "@/app/page.module.css";
+import { useState } from "react";
+import {filterProducts , searchProducts} from "@/service";
+import Categories from "@/components/Categories";
+import SearchBox from "@/components/SearchBox";
+import Card from "@/components/Card";
 
 export default function Home() {
+
+  const [list, setList] = useState(filterProducts('Entradas'));
+  const [srchdTxt, setSrcdTxt] = useState('');
+  const [btnClicked, setBtnClicked] = useState('Entradas');
+
+  const handleFilter = (category) => {
+    setList(filterProducts(category));
+    setBtnClicked(category);
+    setSrcdTxt('');
+  } 
+
+  const handleSearch = (typedText) => {
+    setSrcdTxt(typedText);
+    if(typedText.length > 2){
+      setList(searchProducts(typedText))
+    }
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <>
+      <Head>
+        <title>Cardápio dgital</title>
+        <meta name="description" content="Cardapio dgital" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      <div className='container-1024'>
+
+        <section className={styles.banner}>
+          <h1 className="font-effect-fire">Restaurant</h1>
+          <p>De pratos clássicos a criações surpreendentes,<br/>
+          nosso cardápio é um requinte de sabores<br/>refinados.</p>
+        </section>
+
+        <main className={styles.mainCont}>
+          <Categories
+          onClickEntradas={()=> handleFilter('Entradas')}
+          onClickMassas={()=> handleFilter('Massas')}
+          onClickCarnes={()=> handleFilter('Carnes')}
+          onClickBebidas={()=> handleFilter('Bebidas')}
+          onClickSaladas={()=> handleFilter('Saladas')}
+          onClickSobremesas={()=> handleFilter('Sobremesas')} 
+          selectedBtn={btnClicked} />
+
+          <SearchBox
+          onChange={(event)=> handleSearch(event.target.value)}
+          value={srchdTxt} />
+
+          <section className={styles.foodMenu}>
+            <h2>Cardápio</h2>
+            <div className={styles.cards}>           
+              {list.map((product) =>
+                <Card
+                key={product.id}
+                name={product.name}
+                image={product.image}
+                category={product.category}
+                description={product.description}
+                price={product.price}
+                length={list.length} />
+              )}
+            </div>
+          </section>
+        </main>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   );
 }
