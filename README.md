@@ -1,4 +1,4 @@
-<img src="./public/assets/page.gif.gif">
+<img align="center" src="./public/assets/page.gif.gif">
 
 ﻿<h1 align='center'>
     <p>Restaurant menu</p>
