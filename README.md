@@ -20,7 +20,7 @@ Welcome to the Restaurant Menu repository! This project is a web application des
 - **Search and Filters**: Tools for searching and filtering to easily find specific dishes.
 
 ## 🔨 Tools
-- [React](https://create-react-app.dev/)
+- [Next.js](https://nextjs.org/)
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 - [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
