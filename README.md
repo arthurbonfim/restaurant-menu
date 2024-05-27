@@ -3,10 +3,12 @@
 </p>
 
 ﻿<h1 align='center'>
-    <p>Restaurant menu</p>
+    <p>Restaurant menu🍲</p>
 </h1>
 
+
 <h2 align="center">
+  <p>From classic dishes to surprising creations, our menu is a refinement of refined flavors!</p>
   <a href="https://restaurant-menu-ten-bice.vercel.app/"'>
     See the page!
   </a>
