@@ -1,4 +1,4 @@
-![page](https://imgur.com/a/p5YZSla.gif)
+<img src="./public/assets/page.gif.gif">
 
 ﻿<h1 align='center'>
     <p>Restaurant menu</p>
